@@ -13,7 +13,7 @@ public class Revers {
 
         StringJoiner result = new StringJoiner(" ");
         StringBuilder sub_word = new StringBuilder();
-
+        //12121
         for (var word : wordsArr) {
             var index = 0;
             StringBuilder temp = new StringBuilder(word);
