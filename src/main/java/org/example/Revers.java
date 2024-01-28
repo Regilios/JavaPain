@@ -1,41 +1,46 @@
 package org.example;
 
 import java.util.StringJoiner;
-
+import org.apache.commons.lang3.StringUtils;
 public class Revers {
+    static StringBuilder single_word = new StringBuilder();
+    static StringJoiner resultString = new StringJoiner(" ");
     public static String reversString(String str) {
-
-        String checkNull = str;
-        if(checkNull.trim().equals("")) {
+        if(StringUtils.isBlank(str)) {
             return str;
         }
-        String[] wordsArr = str.split(" ");
 
-        StringJoiner result = new StringJoiner(" ");
-        StringBuilder sub_word = new StringBuilder();
-        //12121
-        for (var word : wordsArr) {
-            var index = 0;
-            StringBuilder temp = new StringBuilder(word);
-            String[] wordChar = word.split("");
+        final String[] words = str.split(" ");
 
-            for (var w_char : wordChar) {
-                if (!w_char.matches("-?\\d+")) sub_word.append(w_char);
-            }
-            sub_word.reverse();
-
-            for (int i = 0; i < word.length(); i++) {
-                if (!Character.isDigit(word.charAt(i))) {
-                    temp.setCharAt(i, sub_word.charAt(index));
-                    index++;
-                } else {
-                    temp.setCharAt(i, temp.charAt(i));
-                }
-            }
-            result.add(temp);
+        for (String word : words) {
+            singleWordsReverse(word);
+            strokeRevers(word);
         }
-        String r = String.valueOf(result);
-        return r;
-    }
 
+        String result = String.valueOf(resultString);
+
+        return result;
+    }
+    public static void singleWordsReverse(String word) {
+        char[] wordChar = word.toCharArray();
+        for (var single_char : wordChar) {
+            if (Character.isAlphabetic(single_char)) {
+                single_word.append(single_char);
+            }
+        }
+        single_word.reverse();
+    }
+     public static void strokeRevers(String word) {
+         StringBuilder temp = new StringBuilder(word);
+         int index = 0;
+         for (int i = 0; i < word.length(); i++) {
+             if (Character.isAlphabetic(word.charAt(i))) {
+                 temp.setCharAt(i, single_word.charAt(index));
+                 index++;
+             } else {
+                 temp.setCharAt(i, temp.charAt(i));
+             }
+         }
+         resultString.add(temp);
+     }
 }

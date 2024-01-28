@@ -7,7 +7,7 @@ public class App
     {
         Scanner console = new Scanner(System.in);
         String str = console.nextLine();
-
+        console.close();
         System.out.println(Revers.reversString(str));
     }
 }
